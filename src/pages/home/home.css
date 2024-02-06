@@ -1,0 +1,9 @@
+:root {
+  --bg-color: blue;
+}
+
+#home {
+  background-color: var(--bg-color);
+}
+
+/*# sourceMappingURL=home.css.map */

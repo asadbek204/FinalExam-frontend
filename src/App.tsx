@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import Home from "./pages/home/Home";
+import Videos from "./pages/videos/Videos";
 
-function App() {
+const videosPage: React.JSX.Element = <Videos style={{width: '100vw', height: '100vh', backgroundColor: 'black'}}/>
+const homePage: React.JSX.Element = <Home style={{backgroundColor: 'blue', width: '100vw', height: '100vh'}}/>
+
+function App(): React.JSX.Element {
+  const [page, setPage] = useState(homePage)
+  const open = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setPage(prev => {
+      let target = e.target as HTMLButtonElement
+      target.innerText = ''
+      return (page === videosPage) ? homePage : videosPage
+    })
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {page}
+      <button style={{position: 'absolute', top: '0', left: '0'}} onClick={open}>{(page === videosPage) ? "openHomePage": "openVideosPage"}</button>
     </div>
   );
 }
